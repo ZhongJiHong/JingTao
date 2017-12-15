@@ -58,8 +58,8 @@ var TT = KindEditorUtil = {		//相当于java中定义的工具类，里面提供
     	var name;
     	$.ajax({
     		type:"post",
-    		url:"/item/cat/queryItemName",
-    		data:{itemId:val},
+    		url:"/item/cat/queryItemCatName",
+    		data:{cid:val},
     		cache:true,    //缓存
     		async:false,    //表示同步   默认的是异步的true
     		dataType:"text",
