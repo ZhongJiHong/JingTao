@@ -6,12 +6,22 @@
 	
 	<!-- 按更新时间查询 -->
 	<select id="findAll" resultType="Item">
-		select * from tb_item order by updated desc 
+		select * from tb_item where status in (1,2) order by updated desc 
 	</select>
 	
 	<!-- 查询商品类名 -->
 	<select id="queryItemCatName" resultType="String">
 		select name from tb_item_cat where id = #{cid}
 	</select>
+	
+	<!-- 商品下架 -->
+	<update id="updateItemStatus">
+		update tb_item set status = #{status} where id in
+		(
+			<foreach collection="ids" item="id" separator=",">
+				#{id}
+			</foreach>
+		)
+	</update>
 	
 </mapper>

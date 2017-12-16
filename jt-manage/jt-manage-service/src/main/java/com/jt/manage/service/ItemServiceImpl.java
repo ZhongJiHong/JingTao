@@ -1,5 +1,6 @@
 package com.jt.manage.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,39 @@ public class ItemServiceImpl implements ItemService {
 	public String queryItemCatName(Long cid) {
 
 		return itemMapper.queryItemCatName(cid);
+	}
+
+	@Override
+	public void saveItem(Item item) {
+
+		item.setCreated(new Date());
+		item.setStatus(1);
+		item.setUpdated(item.getCreated());
+		itemMapper.insertSelective(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+
+		item.setUpdated(new Date());
+		itemMapper.updateByPrimaryKeySelective(item);
+	}
+
+	@Override
+	public void deleteItems(Integer status,Long[] ids) {
+
+		itemMapper.updateItemStatus(status, ids);
+	}
+
+	@Override
+	public void updateInstockItem(Integer status, Long[] ids) {
+
+		itemMapper.updateItemStatus(status, ids);
+	}
+
+	@Override
+	public void updateReshelItem(Integer status, Long[] ids) {
+
+		itemMapper.updateItemStatus(status, ids);
 	}
 }
