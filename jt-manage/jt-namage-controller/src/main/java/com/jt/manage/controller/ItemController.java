@@ -3,12 +3,15 @@ package com.jt.manage.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jt.common.vo.EasyUIResult;
 import com.jt.common.vo.SysResult;
 import com.jt.manage.pojo.Item;
+import com.jt.manage.pojo.ItemDesc;
+import com.jt.manage.service.ItemDescService;
 import com.jt.manage.service.ItemService;
 
 @Controller
@@ -17,6 +20,9 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
+
+	@Autowired
+	private ItemDescService itemDescService;
 
 	private static final Logger log = Logger.getLogger(ItemController.class);
 
@@ -48,10 +54,10 @@ public class ItemController {
 	// 新增商品
 	@RequestMapping("/save")
 	@ResponseBody
-	public SysResult saveItem(Item item) {
+	public SysResult saveItem(Item item, String desc) {
 
 		try {
-			itemService.saveItem(item);
+			itemService.saveItem(item, desc);
 			return SysResult.build(200, "新增商品成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,10 +69,10 @@ public class ItemController {
 	// 商品信息修改
 	@RequestMapping("/update")
 	@ResponseBody
-	public SysResult updateItem(Item item) {
+	public SysResult updateItem(Item item,String desc) {
 
 		try {
-			itemService.updateItem(item);
+			itemService.updateItem(item,desc);
 			return SysResult.build(200, "商品修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +88,7 @@ public class ItemController {
 
 		try {
 			Integer status = 3;
-			itemService.deleteItems(status,ids);
+			itemService.deleteItems(status, ids);
 			return SysResult.build(200, "商品删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,6 +97,7 @@ public class ItemController {
 		}
 
 	}
+
 	// 商品下架
 	@RequestMapping("/instock")
 	@ResponseBody
@@ -98,7 +105,7 @@ public class ItemController {
 
 		try {
 			Integer status = 2;
-			itemService.updateInstockItem(status,ids);
+			itemService.updateInstockItem(status, ids);
 			return SysResult.build(200, "商品已成功下架");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,21 +113,37 @@ public class ItemController {
 			return SysResult.build(200, "商品下架失败");
 		}
 	}
-	
+
 	// 商品上架
 	@RequestMapping("/reshelf")
 	@ResponseBody
 	public SysResult updateReshelfItem(Long[] ids) {
-		
+
 		try {
 			Integer status = 1;
-			itemService.updateReshelItem(status,ids);
+			itemService.updateReshelItem(status, ids);
 			return SysResult.build(200, "商品已成功上架");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage() + "{商品上架失败}");
 			return SysResult.build(200, "商品上架失败");
 		}
+	}
+
+	// 商品回显时,商品详情的回显
+	@RequestMapping("/query/item/desc/{itemId}")
+	@ResponseBody
+	public SysResult queryItemDesc(@PathVariable Long itemId) {
+
+		try {
+			ItemDesc itemDesc = itemDescService.queryItemDesc(itemId);
+			return SysResult.build(200, "商品详情查询成功", itemDesc);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage() + "{商品详情查询失败}");
+			return SysResult.build(201, "商品详情查询失败");
+		}
+
 	}
 
 }

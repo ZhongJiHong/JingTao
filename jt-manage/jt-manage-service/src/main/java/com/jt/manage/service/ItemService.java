@@ -9,9 +9,9 @@ public interface ItemService {
 
 	public String queryItemCatName(Long cid);
 
-	public void saveItem(Item item);
+	public void saveItem(Item item,String desc);
 
-	public void updateItem(Item item);
+	public void updateItem(Item item,String desc);
 
 	public void deleteItems(Integer status,Long[] ids);
 
