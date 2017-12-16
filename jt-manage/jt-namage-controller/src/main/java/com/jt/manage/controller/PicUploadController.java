@@ -10,18 +10,22 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jt.common.service.PropertieService;
 import com.jt.common.vo.PicUploadResult;
 
 @Controller
 public class PicUploadController {
-	
-	
+
 	private static final Logger log = Logger.getLogger(PicUploadController.class);
+
+	@Autowired
+	private PropertieService prop;
 
 	@RequestMapping("/pic/upload")
 	@ResponseBody
@@ -45,8 +49,8 @@ public class PicUploadController {
 			String height = image.getHeight() + "";
 			String width = image.getWidth() + "";
 
-			String url = "http://image.jt.com/";
-			String path = "D://jt-upload/";
+			String url = prop.IMAGE_BASE_URL + "/images/";
+			String path = prop.REPOSITORY_PATH + "/images/";
 
 			String middle = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
 
@@ -59,8 +63,8 @@ public class PicUploadController {
 
 			// 增加随机数字
 			String random = (new Random().nextInt(900) + 100) + "";
-			url = url + middle +"/"+ random + fileName;
-			path = path +"/"+ random + fileName;
+			url = url + middle + "/" + random + fileName;
+			path = path + "/" + random + fileName;
 
 			// 上传
 			uploadFile.transferTo(new File(path));
