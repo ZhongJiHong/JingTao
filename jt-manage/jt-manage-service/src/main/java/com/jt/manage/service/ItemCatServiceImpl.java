@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jt.common.service.RedisSentinelService;
 import com.jt.common.service.RedisService;
 import com.jt.manage.mapper.ItemCatMapper;
 import com.jt.manage.pojo.ItemCat;
@@ -24,8 +25,11 @@ public class ItemCatServiceImpl implements ItemCatService {
 	@Autowired
 	private static final Logger log = Logger.getLogger(ItemCatServiceImpl.class);
 
+	// @Autowired
+	// private RedisService redisService;
+
 	@Autowired
-	private RedisService redisService;
+	private RedisSentinelService redisService;
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
