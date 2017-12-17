@@ -6,9 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jt.common.po.BasePojo;
 
 @Table(name = "tb_item_cat")
+@JsonIgnoreProperties(ignoreUnknown = true)	// 忽略未知的属性 
 public class ItemCat extends BasePojo {
 
 	@Id
@@ -68,7 +70,8 @@ public class ItemCat extends BasePojo {
 	public void setIsParent(Boolean isParent) {
 		this.isParent = isParent;
 	}
-
+	
+	// EasyUI富客户端Tree添加的get方法
 	public String getText() {
 		return name;
 	}
