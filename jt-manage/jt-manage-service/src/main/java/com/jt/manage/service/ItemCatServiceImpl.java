@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jt.common.service.RedisSentinelService;
-import com.jt.common.service.RedisService;
 import com.jt.manage.mapper.ItemCatMapper;
 import com.jt.manage.pojo.ItemCat;
 import com.mysql.jdbc.StringUtils;
+
+import redis.clients.jedis.JedisCluster;
 
 @Service
 public class ItemCatServiceImpl implements ItemCatService {
@@ -28,8 +28,11 @@ public class ItemCatServiceImpl implements ItemCatService {
 	// @Autowired
 	// private RedisService redisService;
 
+	// @Autowired
+	// private RedisSentinelService redisService;
+
 	@Autowired
-	private RedisSentinelService redisService;
+	private JedisCluster jedisCluster;
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -38,7 +41,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 		List<ItemCat> itemCatList = new ArrayList<ItemCat>();
 		String key = "ITEM_CAT_" + parentId;
-		String result = redisService.get(key);
+		String result = jedisCluster.get(key);
 		try {
 
 			if (StringUtils.isEmptyOrWhitespaceOnly(result)) {
@@ -48,7 +51,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 				itemCatList = itemCatMapper.select(itemCat);
 
 				String value = objectMapper.writeValueAsString(itemCatList);
-				redisService.set(key, value);
+				jedisCluster.set(key, value);
 			} else {
 
 				// JSON串转数组,数组转ArrayList集合
