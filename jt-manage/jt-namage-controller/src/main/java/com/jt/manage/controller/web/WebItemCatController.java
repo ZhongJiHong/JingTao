@@ -25,7 +25,7 @@ public class WebItemCatController {
 	private static final Logger log = Logger.getLogger(WebItemCatController.class);
 
 	// http://manage.jt.com/web/itemcat/all?callback=category.getDataService
-	
+	// 实现商品分类列表的显示
 	@RequestMapping("/itemcat/all")
 	public void webFindItemCatList(String callback, HttpServletResponse response) {
 

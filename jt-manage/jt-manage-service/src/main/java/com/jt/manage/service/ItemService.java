@@ -9,14 +9,16 @@ public interface ItemService {
 
 	public String queryItemCatName(Long cid);
 
-	public void saveItem(Item item,String desc);
+	public void saveItem(Item item, String desc);
 
-	public void updateItem(Item item,String desc);
+	public void updateItem(Item item, String desc);
 
-	public void deleteItems(Integer status,Long[] ids);
+	public void deleteItems(Integer status, Long[] ids);
 
-	public void updateInstockItem(Integer status,Long[] ids);
+	public void updateInstockItem(Integer status, Long[] ids);
 
 	public void updateReshelItem(Integer status, Long[] ids);
+
+	public Item findItemById(Long itemId);
 
 }
