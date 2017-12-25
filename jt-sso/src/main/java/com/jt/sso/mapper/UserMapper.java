@@ -7,7 +7,7 @@ import com.jt.sso.pojo.User;
 
 public interface UserMapper extends SysMapper<User> {
 
-	public Integer findData(@Param("column") String column, @Param("param") String param);
+	public int findData(@Param("column") String column, @Param("param") String param);
 
 	public User findUserByU_P(@Param("username") String username, @Param("password") String password);
 

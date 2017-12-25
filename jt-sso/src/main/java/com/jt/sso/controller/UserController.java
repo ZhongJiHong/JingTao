@@ -23,7 +23,7 @@ public class UserController {
 	// 请求地址:http://sso.jt.com/user/check/sunday123/1
 	@RequestMapping("/check/{param}/{type}")
 	@ResponseBody
-	public Object checkData(@PathVariable String param, @PathVariable String type, String callback) {
+	public Object checkData(@PathVariable String param, @PathVariable int type, String callback) {
 
 		Boolean result = userService.checkData(param, type);
 
@@ -61,4 +61,17 @@ public class UserController {
 			return SysResult.oK(ticket);
 		}
 	}
+
+	// http://sso.jt.com/user/query/{ticket}
+	@RequestMapping("/query/{ticket}")
+	@ResponseBody
+	public Object findTicket(@PathVariable String ticket, String callback) {
+
+		SysResult sysResult = userService.findTicket(ticket);
+		MappingJacksonValue jacksonValue = new MappingJacksonValue(sysResult);
+		jacksonValue.setJsonpFunction(callback);
+
+		return jacksonValue;
+	}
+
 }

@@ -6,9 +6,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jt.common.vo.SysResult;
 import com.jt.sso.mapper.UserMapper;
 import com.jt.sso.pojo.User;
 
@@ -27,23 +29,23 @@ public class UserServiceImpl implements UserService {
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
-	public Boolean checkData(String param, String type) {
+	public Boolean checkData(String param, int type) {
 
 		String column = null;
 
 		switch (type) {
-		case "1":
+		case 1:
 			column = "username";
 			break;
-		case "2":
+		case 2:
 			column = "phone";
 			break;
-		case "3":
+		case 3:
 			column = "email";
 			break;
 		}
 
-		Integer num = userMapper.findData(column, param);
+		int num = userMapper.findData(column, param);
 		return num > 0 ? true : false;
 	}
 
@@ -95,6 +97,18 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			log.error(e.getMessage() + "{JSON转化异常}");
 			return null;
+		}
+	}
+
+	@Override
+	public SysResult findTicket(String ticket) {
+
+		String userJSON = jedisCluster.get(ticket);
+		if (StringUtils.isEmpty(userJSON)) {
+
+			return SysResult.build(201, "用户未登录");
+		} else {
+			return SysResult.oK(userJSON);
 		}
 	}
 
