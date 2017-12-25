@@ -1,17 +1,9 @@
-package com.jt.cart.pojo;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package com.jt.web.pojo;
 
 import com.jt.common.po.BasePojo;
 
-@Table(name = "tb_cart")
 public class Cart extends BasePojo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; // 购物车id
 	private Long userId; // 用户id
 	private Long itemId; // 商品id

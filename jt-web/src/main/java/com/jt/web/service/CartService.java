@@ -1,20 +1,21 @@
-package com.jt.cart.service;
+package com.jt.web.service;
 
 import java.util.List;
 
-import com.jt.cart.pojo.Cart;
 import com.jt.common.vo.SysResult;
+import com.jt.web.pojo.Cart;
 
 public interface CartService {
+
 	/**
-	 * 实现根据用户id查询用户购物车数据
-	 * @param userId:用户id
+	 * 根据用户ID查询购物车数据
+	 * 
 	 * @return
 	 */
 	public List<Cart> findCartByUserId(Long userId);
 
 	/**
-	 * 实现购物车商品购买数量的修改
+	 * 根据userId和itemId更新商品的购买数量
 	 * 
 	 * @param userId:用户id
 	 * @param itemId:商品id
@@ -24,7 +25,7 @@ public interface CartService {
 	public SysResult updateCartNum(Long userId, Long itemId, Integer num);
 
 	/**
-	 * 实现购物车商品的删除
+	 * 根据userId和itemId删除购物车中的商品
 	 * 
 	 * @param userId:用户id
 	 * @param itemId:商品id
@@ -33,10 +34,12 @@ public interface CartService {
 	public SysResult deleteCartItem(Long userId, Long itemId);
 	
 	/**
-	 * 实现将商品添加到购物车
-	 * @param cart:封装的用户id,商品信息
-	 * @return
+	 * 根据userId和itemId将商品添加到购物车
+	 * @param userId:用户id
+	 * @param itemId:商品id
+	 * @param cart:商品的信息(商品名称title,价格price,数量num,主图image)
+	 * @return SysResult
 	 */
-	public SysResult saveCartItem(Cart cart);
+	public SysResult saveCartItem(Long userId, Long itemId,Cart cart);
 
 }
