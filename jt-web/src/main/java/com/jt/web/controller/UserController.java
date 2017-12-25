@@ -14,12 +14,17 @@ import com.jt.common.vo.SysResult;
 import com.jt.web.pojo.User;
 import com.jt.web.service.UserService;
 
+import redis.clients.jedis.JedisCluster;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private JedisCluster jedisCluster;
 
 	// 实现页面的转向
 	@RequestMapping("/login")
@@ -59,6 +64,18 @@ public class UserController {
 
 		CookieUtils.setCookie(request, response, "JT_TICKET", ticket);
 		return result;
+	}
+
+	// 用户退出 /user/logout.html
+	@RequestMapping("/logout")
+	public String doLogout(HttpServletRequest request, HttpServletResponse response) {
+
+		String ticket = CookieUtils.getCookieValue(request, "JT_TICKET");
+		jedisCluster.del(ticket);
+
+		CookieUtils.deleteCookie(request, response, "JT_TICKET");
+
+		return "redirect:/index.html";
 	}
 
 }
