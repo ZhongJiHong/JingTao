@@ -36,7 +36,10 @@
 			<mvc:mapping path="/cart/**" />
 			<bean class="com.jt.web.interseptor.WebInterseptor"></bean>
 		</mvc:interceptor>
-		
+		<mvc:interceptor>
+			<mvc:mapping path="/order/**" />
+			<bean class="com.jt.web.interseptor.WebInterseptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 </beans>
