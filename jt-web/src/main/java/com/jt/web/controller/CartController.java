@@ -18,6 +18,7 @@ import com.jt.common.util.CookieUtils;
 import com.jt.common.vo.SysResult;
 import com.jt.web.pojo.Cart;
 import com.jt.web.service.CartService;
+import com.jt.web.utils.UserThreadLocal;
 
 import redis.clients.jedis.JedisCluster;
 
@@ -38,7 +39,8 @@ public class CartController {
 	@RequestMapping("/show")
 	public String toCart(HttpServletRequest request, Model model) {
 
-		Long userId = 13L;
+		// Long userId = 13L;
+		Long userId = UserThreadLocal.getUser().getId();
 		try {
 			List<Cart> cartList = cartService.findCartByUserId(userId);
 
@@ -56,7 +58,8 @@ public class CartController {
 	@ResponseBody // 查看js,并不需要任何返回数据
 	public SysResult updateCartNum(@PathVariable Long itemId, @PathVariable Integer num) {
 
-		Long userId = 13L;
+		// Long userId = 13L;
+		Long userId = UserThreadLocal.getUser().getId();
 		return cartService.updateCartNum(userId, itemId, num);
 	}
 
@@ -65,7 +68,8 @@ public class CartController {
 	@RequestMapping("/delete/{itemId}")
 	public String deleteCartItem(@PathVariable Long itemId) {
 
-		Long userId = 13L;
+		// Long userId = 13L;
+		Long userId = UserThreadLocal.getUser().getId();
 		SysResult sysResult = cartService.deleteCartItem(userId, itemId);
 		// 不管成败与否,皆重定向到购物车
 		return "redirect:/cart/show.html";
@@ -75,7 +79,8 @@ public class CartController {
 	@RequestMapping("/add/{itemId}")
 	public String saveCartItem(@PathVariable Long itemId, Cart cart) {
 
-		Long userId = 13L;
+		// Long userId = 13L;
+		Long userId = UserThreadLocal.getUser().getId();
 		SysResult sysResult = cartService.saveCartItem(userId, itemId, cart);
 
 		return "redirect:/cart/show.html";

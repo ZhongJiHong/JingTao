@@ -95,7 +95,7 @@ public class CartServiceImpl implements CartService {
 		params.put("num", cart.getNum() + "");
 
 		try {
-			String result = httpClientService.doPost(url, params);
+			String result = httpClientService.doPost(url, params, "utf-8");
 			return objectMapper.readValue(result, SysResult.class);
 		} catch (Exception e) {
 			e.printStackTrace();
