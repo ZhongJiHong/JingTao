@@ -73,14 +73,14 @@ pageConfig.DATA_MScroll =[
     },
     {
         "alt": "",
-        "href": "http://www.jt.com/items/562379.html",
+        "href": "http://www.jt.com/items/1474391954.html",
         "index": 1,
         "src": "http://img13.360buyimg.com/da/jfs/t283/161/1609640628/12590/ecd295d3/543f2a46N876265d2.jpg",
         "ext": ""
     },
     {
         "alt": "",
-        "href": "http://www.jt.com/items/562379.html",
+        "href": "http://www.jt.com/items/1474391956.html",
         "index": 2,
         "src": "http://img14.360buyimg.com/da/jfs/t343/107/1701086212/14927/28286262/54407540N2aace14b.jpg",
         "ext": ""

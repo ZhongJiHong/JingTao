@@ -225,5 +225,30 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.3.Final</version>
 		</dependency>
+		
+		<!-- Lucene -->
+		<dependency>  
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.10.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>4.10.2</version>
+		</dependency>
+		<dependency> 
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>4.10.2</version>
+		</dependency>
+		
+		<!-- IK分词器 -->
+		<dependency>
+			<groupId>org.wltea.analyzer</groupId>
+			<artifactId>ik-analyzer</artifactId>
+			<version>2012FF_u1</version>
+		</dependency>
+		
 	</dependencies>
 </project>

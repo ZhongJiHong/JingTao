@@ -7,8 +7,9 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+
 	<!-- MVC注解驱动，引入3个类request,response,json -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven />
 
 	<!-- 配置扫描器，使得@Controller注解生效 -->
 	<context:component-scan base-package="com.jt.web.controller" />
@@ -25,4 +26,17 @@
 
 	<!-- 处理静态资源被“/”所拦截的问题 -->
 	<mvc:default-servlet-handler />
+
+	<!-- 定义拦截器 -->
+
+	<mvc:interceptors>
+		<!--内部可以定义多个拦截器 -->
+		<mvc:interceptor>
+			<!--定义拦截路径 表示只对购物车生效 -->
+			<mvc:mapping path="/cart/**" />
+			<bean class="com.jt.web.interseptor.WebInterseptor"></bean>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+
 </beans>
