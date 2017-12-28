@@ -250,5 +250,18 @@
 			<version>2012FF_u1</version>
 		</dependency>
 		
+		<!-- 定时任务 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!--定时任务需要依赖c3p0jar包  -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		
 	</dependencies>
 </project>
