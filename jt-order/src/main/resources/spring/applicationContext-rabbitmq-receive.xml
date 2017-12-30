@@ -31,6 +31,7 @@
 		<rabbit:listener ref="rabbitOrderService" method="saveOrder" queue-names="queue_name"/>
 	</rabbit:listener-container>
 	
-	<bean id="rabbitOrderService" class="com.jt.order.service.RabbitOrderService"></bean>
+	<!-- 注意坑	spingmvc扫描的service -->
+	<bean id="rabbitOrderService" class="com.jt.order.mq.service.RabbitOrderService"></bean>
 	
 </beans>

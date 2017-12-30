@@ -1,4 +1,4 @@
-package com.jt.order.service;
+package com.jt.order.mq.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
